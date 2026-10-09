@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eadcc7">
+  <title>Layla Love Leo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;600;700&display=swap');
+    :root {
+      --beige: #eadcc7;
+      --beige-light: #f5ecdf;
+      --navy: #1e2d49;
+      --navy-soft: #34415c;
+      --gold: #b99b6b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--navy);
+      background: var(--beige);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      overflow-x: hidden;
+    }
+    .stars, .stars::before, .stars::after {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      content: ""; background-repeat: repeat;
+    }
+    .stars {
+      opacity: .48;
+      background-image:
+        radial-gradient(1.5px 1.5px at 25px 35px, #fff8e9 98%, transparent),
+        radial-gradient(1px 1px at 105px 125px, #fff8e9 98%, transparent),
+        radial-gradient(1.2px 1.2px at 180px 65px, #b99b6b 98%, transparent),
+        radial-gradient(1px 1px at 240px 175px, #fff8e9 98%, transparent);
+      background-size: 280px 220px;
+      animation: drift 28s linear infinite;
+    }
+    .stars::before {
+      opacity: .55;
+      background-image: radial-gradient(2px 2px at 75px 85px, #fff8e9 98%, transparent),
+                        radial-gradient(1px 1px at 220px 30px, #b99b6b 98%, transparent);
+      background-size: 320px 260px;
+      animation: drift 38s linear infinite reverse;
+    }
+    @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-70px); } }
+    .screen {
+      position: relative; z-index: 1; min-height: 100svh; width: 100%;
+      display: none; align-items: center; justify-content: center;
+      padding: 28px 18px; opacity: 0;
+    }
+    .screen.active { display: flex; animation: fadeIn .85s ease forwards; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .panel {
+      width: min(680px, 100%); padding: clamp(28px, 6vw, 58px);
+      background: rgba(245, 236, 223, .76);
+      border: 1px solid rgba(185, 155, 107, .48);
+      border-radius: 22px; box-shadow: 0 18px 55px rgba(30, 45, 73, .09);
+      text-align: center; backdrop-filter: blur(3px);
+    }
+    .eyebrow { letter-spacing: .19em; text-transform: uppercase; font-size: .8rem; color: #77664f; }
+    h1, h2 { margin: 12px 0 18px; font-weight: 500; }
+    h1 { font-family: 'Dancing Script', cursive; font-size: clamp(2.8rem, 10vw, 5rem); }
+    h2 { font-size: clamp(1.65rem, 5vw, 2.2rem); }
+    p { line-height: 1.72; font-size: clamp(1.08rem, 3.2vw, 1.28rem); margin: 0 0 17px; }
+    .handwritten { font-family: 'Dancing Script', cursive; }
+    .button {
+      display: inline-block; border: 1px solid var(--navy); border-radius: 999px;
+      background: var(--navy); color: var(--beige-light); padding: 12px 25px;
+      margin-top: 12px; font: inherit; font-size: 1.08rem; letter-spacing: .04em;
+      cursor: pointer; transition: transform .25s ease, background .25s ease, color .25s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: transparent; color: var(--navy); }
+    .letter-title { font-family: 'Dancing Script', cursive; font-size: clamp(2.5rem, 8vw, 3.6rem); margin: 0 0 24px; }
+    .letter-copy { text-align: left; }
+    .letter-copy p { margin-bottom: 17px; }
+    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 1.8rem; margin-top: 22px; }
+    .music-card { max-width: 520px; }
+    .music-note { font-size: 2rem; margin: 10px 0 20px; }
+    audio { width: 100%; margin: 14px 0 10px; accent-color: var(--navy); }
+    .song-title { font-size: 1.35rem; margin-bottom: 4px; }
+    .galaxy { font-family: 'Dancing Script', cursive; font-size: clamp(1.55rem, 5vw, 2.1rem); margin-top: 22px; }
+    .small-note { font-size: .95rem; opacity: .76; margin-top: 12px; }
+    @media (max-width: 480px) {
+      .panel { padding: 28px 22px; border-radius: 18px; }
+      .letter-copy p { line-height: 1.58; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <main>
+    <section class="screen active" id="welcome">
+      <div class="panel">
+        <div class="eyebrow">a little something for you</div>
+        <h1>For you, Leo</h1>
+        <p>Made with love, just for you.</p>
+        <button class="button" id="openLetter">Press here</button>
+      </div>
+    </section>
+
+    <section class="screen" id="letter">
+      <article class="panel">
+        <div class="letter-title">To my boy</div>
+        <div class="letter-copy">
+          <p>I wrote this letter with all my love, hoping to find a way to express my feelings to you.</p>
+          <p>First of all, happy birthday to my favorite person!</p>
+          <p>I hope your birthday is beautiful and that this new year of your life is even better than the last one. I hope it brings you all the beautiful things you deserve.</p>
+          <p>I honestly don't know how to put into words just how much you mean to me. You've become such an important part of my everyday life, and my day truly doesn't feel complete until I talk to you.</p>
+          <p>You're genuinely the most special person to me and the most wonderful person I've ever met. You're creative, kind, funny, and your personality is unique in every little detail. Having you in my life gives me such a beautiful feeling.</p>
+          <p>I wanted to make you something small that would make you smile, just like you always manage to make me smile with all the little things and tiny details you do for me.</p>
+          <p>And finally, I want to tell you once again: happy birthday, Sweetie. I hope you enjoy your day and make beautiful memories, because today isn't just an ordinary day.</p>
+          <p><strong>Today is special because it's the day the most special person in my life was born. ✋🏻💕</strong></p>
+          <div class="signature">With all my love ♡</div>
+        </div>
+        <button class="button" id="openMusic">One more thing...</button>
+      </article>
+    </section>
+
+    <section class="screen" id="music">
+      <div class="panel music-card">
+        <div class="eyebrow">a song for you</div>
+        <h2>Just for you, Sweetie</h2>
+        <div class="music-note" aria-hidden="true">✦ ♡ ✦</div>
+        <div class="song-title">Can't Help Falling in Love</div>
+        <p class="small-note">A little song to go with this little gift.</p>
+        <audio id="song" controls preload="metadata">
+          <source src="song.m4a" type="audio/mp4">
+          Your browser does not support the audio player.
+        </audio>
+        <div class="galaxy">Take my hand<br>Let's create our own galaxy</div>
+        <button class="button" id="backToLetter">Read the letter again</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const screens = [...document.querySelectorAll('.screen')];
+    const song = document.getElementById('song');
+
+    function showScreen(id) {
+      screens.forEach(screen => {
+        screen.classList.toggle('active', screen.id === id);
+      });
+      if (id !== 'music') song.pause();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.getElementById('openLetter').addEventListener('click', () => showScreen('letter'));
+    document.getElementById('openMusic').addEventListener('click', () => showScreen('music'));
+    document.getElementById('backToLetter').addEventListener('click', () => showScreen('letter'));
+  </script>
+</body>
+</html>
